@@ -1,0 +1,48 @@
+.breadcrumb {
+	color: #ffffff;
+	background-color: #e85356;
+}
+.breadcrumb a {
+	color: #ffffff;
+}
+.breadcrumb a:hover {
+	color: #a0a0a0;
+	text-decoration: none;
+}
+.category_list, .artist_list {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.category_list li {
+	float: left;
+	width: 25%;
+	height: 220px;
+	list-style: none;
+	text-align: center;
+	margin: 5px 0;
+}
+.artist_list li {
+	float: left;
+	width: 25%;
+	list-style: none;
+	text-align: center;
+	margin: 5px 0;
+}
+.artist_card {
+	padding: 0 5px;
+}
+.artist_card_title {
+	white-space: nowrap;
+	overflow: hidden;
+}
+.artist_card_view {
+	width: 30%;
+	float: left;
+	text-align: left;
+}
+.artist_card_name {
+	width: 70%;
+	float: left;
+	text-align: right;
+}
