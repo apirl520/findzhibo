@@ -18,7 +18,6 @@ class AdController extends Controller {
 	public function actions() {
 		return array(
 			'push' => 'application.actions.ad.PushAction',
-			'screen' => 'application.actions.ad.ScreenAction',
 		);
 	}
 }

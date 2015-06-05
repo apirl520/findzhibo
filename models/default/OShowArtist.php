@@ -19,51 +19,49 @@
  * @property string $update_time
  * @property string $create_time
  */
-class OShowArtist extends CActiveRecord
-{
+class OShowArtist extends CActiveRecord {
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
-	{
+	public function tableName() {
 		return 'show_artist';
 	}
 
 	/**
 	 * @return array validation rules for model attributes.
 	 */
-	public function rules()
-	{
+	public function rules() {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
 			array('source_id, name, title, cover, url, view, famous, hot, on, update_time, create_time', 'required'),
-			array('source_id, famous, hot, on', 'numerical', 'integerOnly'=>true),
-			array('name, image, cover', 'length', 'max'=>120),
-			array('title, url, direct_url', 'length', 'max'=>250),
-			array('view', 'length', 'max'=>25),
+			array('source_id, famous, hot, on', 'numerical', 'integerOnly' => true),
+			array('name, image, cover', 'length', 'max' => 120),
+			array('title, url, direct_url', 'length', 'max' => 250),
+			array('view', 'length', 'max' => 25),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, source_id, name, title, image, cover, url, direct_url, view, famous, hot, on, update_time, create_time', 'safe', 'on'=>'search'),
+			array(
+				'id, source_id, name, title, image, cover, url, direct_url, view, famous, hot, on, update_time, create_time',
+				'safe',
+				'on' => 'search'
+			),
 		);
 	}
 
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
-	{
+	public function relations() {
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
-		);
+		return array();
 	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
-	public function attributeLabels()
-	{
+	public function attributeLabels() {
 		return array(
 			'id' => 'ID',
 			'source_id' => 'Source',
@@ -94,29 +92,28 @@ class OShowArtist extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
-	{
+	public function search() {
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('source_id',$this->source_id);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('cover',$this->cover,true);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('direct_url',$this->direct_url,true);
-		$criteria->compare('view',$this->view,true);
-		$criteria->compare('famous',$this->famous);
-		$criteria->compare('hot',$this->hot);
-		$criteria->compare('on',$this->on);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('id', $this->id);
+		$criteria->compare('source_id', $this->source_id);
+		$criteria->compare('name', $this->name, true);
+		$criteria->compare('title', $this->title, true);
+		$criteria->compare('image', $this->image, true);
+		$criteria->compare('cover', $this->cover, true);
+		$criteria->compare('url', $this->url, true);
+		$criteria->compare('direct_url', $this->direct_url, true);
+		$criteria->compare('view', $this->view, true);
+		$criteria->compare('famous', $this->famous);
+		$criteria->compare('hot', $this->hot);
+		$criteria->compare('on', $this->on);
+		$criteria->compare('update_time', $this->update_time, true);
+		$criteria->compare('create_time', $this->create_time, true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 
@@ -126,8 +123,7 @@ class OShowArtist extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return OShowArtist the static model class
 	 */
-	public static function model($className=__CLASS__)
-	{
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 }

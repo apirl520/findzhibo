@@ -73,6 +73,7 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params' => array(
-		'open_status' => true
+		'open_status' => true,
+		'host' => 'http://www.findzhibo.com'
 	),
 );

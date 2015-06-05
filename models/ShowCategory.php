@@ -11,5 +11,5 @@ class ShowCategory extends OShowCategory {
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
-	
+
 }

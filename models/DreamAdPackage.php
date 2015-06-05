@@ -11,4 +11,8 @@ class DreamAdPackage extends ODreamAdPackage {
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
+
+	public function getAdPackageInfo($ad_id) {
+		return $this->findByPk($ad_id);
+	}
 }

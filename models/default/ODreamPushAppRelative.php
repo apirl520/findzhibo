@@ -1,21 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "show_resource".
+ * This is the model class for table "dream_push_app_relative".
  *
- * The followings are the available columns in table 'show_resource':
- * @property integer $id
- * @property string $name
- * @property string $host
- * @property string $update_time
- * @property string $create_time
+ * The followings are the available columns in table 'dream_push_app_relative':
+ * @property integer $push_id
+ * @property integer $app_id
+ * @property integer $push_type
+ * @property string $ctime
  */
-class OShowResource extends CActiveRecord {
+class ODreamPushAppRelative extends CActiveRecord {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName() {
-		return 'show_resource';
+		return 'dream_push_app_relative';
 	}
 
 	/**
@@ -25,12 +24,11 @@ class OShowResource extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, host, update_time, create_time', 'required'),
-			array('name', 'length', 'max' => 25),
-			array('host', 'length', 'max' => 120),
+			array('push_id, app_id, push_type, ctime', 'required'),
+			array('push_id, app_id, push_type', 'numerical', 'integerOnly' => true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, host, update_time, create_time', 'safe', 'on' => 'search'),
+			array('push_id, app_id, push_type, ctime', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -48,11 +46,10 @@ class OShowResource extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'host' => 'Host',
-			'update_time' => 'Update Time',
-			'create_time' => 'Create Time',
+			'push_id' => 'Push',
+			'app_id' => 'App',
+			'push_type' => 'Push Type',
+			'ctime' => 'Ctime',
 		);
 	}
 
@@ -73,11 +70,10 @@ class OShowResource extends CActiveRecord {
 
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('id', $this->id);
-		$criteria->compare('name', $this->name, true);
-		$criteria->compare('host', $this->host, true);
-		$criteria->compare('update_time', $this->update_time, true);
-		$criteria->compare('create_time', $this->create_time, true);
+		$criteria->compare('push_id', $this->push_id);
+		$criteria->compare('app_id', $this->app_id);
+		$criteria->compare('push_type', $this->push_type);
+		$criteria->compare('ctime', $this->ctime, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
@@ -85,10 +81,17 @@ class OShowResource extends CActiveRecord {
 	}
 
 	/**
+	 * @return CDbConnection the database connection used for this class
+	 */
+	public function getDbConnection() {
+		return Yii::app()->dream;
+	}
+
+	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return OShowResource the static model class
+	 * @return ODreamPushAppRelative the static model class
 	 */
 	public static function model($className = __CLASS__) {
 		return parent::model($className);

@@ -9,8 +9,7 @@
  * @property string $package_name
  * @property string $version_code
  * @property string $version_name
- * @property string $filesize
- * @property integer $size
+ * @property integer $file_size
  * @property string $level
  * @property string $download_time
  * @property string $download_url
@@ -37,18 +36,18 @@ class ODreamAdPackage extends CActiveRecord {
 		// will receive user inputs.
 		return array(
 			array(
-				'app_name, package_name, version_code, version_name, filesize, size, level, download_time, download_url, icon_url, image_url, description, show_flag, show_order, ctime',
+				'app_name, package_name, version_code, version_name, file_size, level, download_time, download_url, icon_url, image_url, description, show_flag, show_order, ctime',
 				'required'
 			),
-			array('size, show_flag, show_order', 'numerical', 'integerOnly' => true),
+			array('file_size, show_flag, show_order', 'numerical', 'integerOnly' => true),
 			array('app_name, package_name, download_url, icon_url', 'length', 'max' => 200),
 			array('version_code', 'length', 'max' => 20),
-			array('version_name, filesize, level', 'length', 'max' => 100),
+			array('version_name, level', 'length', 'max' => 100),
 			array('download_time', 'length', 'max' => 10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array(
-				'id, app_name, package_name, version_code, version_name, filesize, size, level, download_time, download_url, icon_url, image_url, description, show_flag, show_order, ctime',
+				'id, app_name, package_name, version_code, version_name, file_size, level, download_time, download_url, icon_url, image_url, description, show_flag, show_order, ctime',
 				'safe',
 				'on' => 'search'
 			),
@@ -74,8 +73,7 @@ class ODreamAdPackage extends CActiveRecord {
 			'package_name' => 'Package Name',
 			'version_code' => 'Version Code',
 			'version_name' => 'Version Name',
-			'filesize' => 'Filesize',
-			'size' => 'Size',
+			'file_size' => 'File Size',
 			'level' => 'Level',
 			'download_time' => 'Download Time',
 			'download_url' => 'Download Url',
@@ -110,8 +108,7 @@ class ODreamAdPackage extends CActiveRecord {
 		$criteria->compare('package_name', $this->package_name, true);
 		$criteria->compare('version_code', $this->version_code, true);
 		$criteria->compare('version_name', $this->version_name, true);
-		$criteria->compare('filesize', $this->filesize, true);
-		$criteria->compare('size', $this->size);
+		$criteria->compare('file_size', $this->file_size);
 		$criteria->compare('level', $this->level, true);
 		$criteria->compare('download_time', $this->download_time, true);
 		$criteria->compare('download_url', $this->download_url, true);
