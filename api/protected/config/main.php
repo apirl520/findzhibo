@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-	'name' => 'API for APPS in 91shoufu',
+	'name' => 'API for Dream Project',
 	'language' => 'zh_cn',
 	// preloading 'log' component
 	'preload' => array('log', 'bootstrap3'),
@@ -73,7 +73,7 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params' => array(
-		'open_status' => true,
+		'open_status' => false,
 		'host' => 'http://www.findzhibo.com'
 	),
 );

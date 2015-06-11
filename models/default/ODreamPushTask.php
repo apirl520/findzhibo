@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'dream_push_task':
  * @property integer $id
  * @property integer $push_type
+ * @property string $push_title
  * @property string $push_description
  * @property integer $push_ad_id
  * @property integer $push_status
@@ -27,13 +28,14 @@ class ODreamPushTask extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('push_type, push_description, push_ad_id, push_status, push_limit, ctime', 'required'),
+			array('push_type, push_title, push_description, push_ad_id, push_status, push_limit, ctime', 'required'),
 			array('push_type, push_ad_id, push_status, push_limit', 'numerical', 'integerOnly' => true),
+			array('push_title', 'length', 'max' => 120),
 			array('push_description', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array(
-				'id, push_type, push_description, push_ad_id, push_status, push_limit, ctime',
+				'id, push_type, push_title, push_description, push_ad_id, push_status, push_limit, ctime',
 				'safe',
 				'on' => 'search'
 			),
@@ -56,6 +58,7 @@ class ODreamPushTask extends CActiveRecord {
 		return array(
 			'id' => 'ID',
 			'push_type' => 'Push Type',
+			'push_title' => 'Push Title',
 			'push_description' => 'Push Description',
 			'push_ad_id' => 'Push Ad',
 			'push_status' => 'Push Status',
@@ -83,6 +86,7 @@ class ODreamPushTask extends CActiveRecord {
 
 		$criteria->compare('id', $this->id);
 		$criteria->compare('push_type', $this->push_type);
+		$criteria->compare('push_title', $this->push_title, true);
 		$criteria->compare('push_description', $this->push_description, true);
 		$criteria->compare('push_ad_id', $this->push_ad_id);
 		$criteria->compare('push_status', $this->push_status);

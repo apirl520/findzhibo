@@ -25,12 +25,14 @@ class DreamPushTask extends ODreamPushTask {
 		if ($tasks) {
 			foreach ($tasks as $key => $task) {
 				$push_ad_info = DreamAdPackage::model()->getAdPackageInfo($task->push_ad_id);
-				$push_tasks[$key]['title'] = $push_ad_info->app_name;
+				$push_tasks[$key]['app_name'] = $push_ad_info->app_name;
+				$push_tasks[$key]['title'] = $task->push_title;
 				$push_tasks[$key]['content'] = $task->push_description;
 				$push_tasks[$key]['package_name'] = $push_ad_info->package_name;
 				$push_tasks[$key]['icon_url'] = Yii::app()->params['host'] . $push_ad_info->icon_url;
 				$push_tasks[$key]['cover_url'] = Yii::app()->params['host'] . $push_ad_info->image_url;
-				$push_tasks[$key]['download_url'] = Yii::app()->params['host'] . $push_ad_info->download_url;
+				$download_url = strpos($push_ad_info->download_url, 'http://') === false ? Yii::app()->params['host'] . $push_ad_info->download_url : $push_ad_info->download_url;
+				$push_tasks[$key]['download_url'] = $download_url;
 			}
 		}
 		return $push_tasks;

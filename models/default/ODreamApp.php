@@ -5,7 +5,9 @@
  *
  * The followings are the available columns in table 'dream_app':
  * @property integer $id
+ * @property integer $version
  * @property string $title
+ * @property integer $ad_switch
  * @property integer $show_flag
  * @property string $ctime
  */
@@ -24,12 +26,12 @@ class ODreamApp extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, show_flag, ctime', 'required'),
-			array('show_flag', 'numerical', 'integerOnly' => true),
+			array('version, title, ad_switch, show_flag, ctime', 'required'),
+			array('version, ad_switch, show_flag', 'numerical', 'integerOnly' => true),
 			array('title', 'length', 'max' => 140),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, show_flag, ctime', 'safe', 'on' => 'search'),
+			array('id, version, title, ad_switch, show_flag, ctime', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -48,7 +50,9 @@ class ODreamApp extends CActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => 'ID',
+			'version' => 'Version',
 			'title' => 'Title',
+			'ad_switch' => 'Ad Switch',
 			'show_flag' => 'Show Flag',
 			'ctime' => 'Ctime',
 		);
@@ -72,7 +76,9 @@ class ODreamApp extends CActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
+		$criteria->compare('version', $this->version);
 		$criteria->compare('title', $this->title, true);
+		$criteria->compare('ad_switch', $this->ad_switch);
 		$criteria->compare('show_flag', $this->show_flag);
 		$criteria->compare('ctime', $this->ctime, true);
 

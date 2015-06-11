@@ -17,7 +17,8 @@ class PushAction extends BaseAction {
 		if ($json && $app_code && $app_version) {
 			//push type 1:push 2:screen
 			$push_type = isset($json->type) ? $json->type : 1;
-			if (!Yii::app()->params['open_status']) {
+			$open_status = DreamApp::model()->checkOpenStatus($app_code, $app_version);
+			if (!$open_status) {
 				return $this->response->code = 502;
 			}
 			//检查当前应用是否有推送任务

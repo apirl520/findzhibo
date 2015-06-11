@@ -28,4 +28,23 @@ class Util {
 		}
 	}
 
+	public static function formatFileSize($fileSize, $num = 2) {
+		$size = sprintf("%u", $fileSize);
+		if ($size == 0) {
+			return ("0Bytes");
+		}
+		$unit = array(
+			"Bytes",
+			"KB",
+			"MB",
+			"GB",
+			"TB",
+			"PB",
+			"EB",
+			"ZB",
+			"YB"
+		);
+		return round($size / pow(1024, ($i = floor(log($size, 1024)))), $num) . $unit[$i];
+	}
+
 }

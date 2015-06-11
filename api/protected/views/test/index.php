@@ -2,19 +2,6 @@
 	<?php $form = $this->beginWidget('CActiveForm'); ?>
 
 	<div class="test">
-		<div class="label">检查广告开关状态: <?php echo Yii::app()->createUrl('/device/open'); ?></div>
-		<div class="row buttons">
-			<?php echo CHtml::submitButton('提交', array('submit' => array('/device/open'))); ?>
-		</div>
-	</div>
-
-	<?php $this->endWidget(); ?>
-</div>
-
-<div class="form">
-	<?php $form = $this->beginWidget('CActiveForm'); ?>
-
-	<div class="test">
 		<div class="label">获取UDID: <?php echo Yii::app()->createUrl('/device/uuid'); ?></div>
 		<div class="row">
 			<div class="name">json:</div>
@@ -63,6 +50,33 @@
 		</div>
 		<div class="row buttons">
 			<?php echo CHtml::submitButton('提交', array('submit' => array('/ad/push'))); ?>
+		</div>
+	</div>
+
+	<?php $this->endWidget(); ?>
+</div>
+
+<div class="form">
+	<?php $form = $this->beginWidget('CActiveForm'); ?>
+
+	<div class="test">
+		<div class="label">获取广告池: <?php echo Yii::app()->createUrl('/ad/pool'); ?></div>
+		<div class="row">
+			<div class="name">json:</div>
+			<?php echo CHtml::textArea('json', '{
+    "uuid" : "fa57afd2-8415-4ded-bb0f-bedf54b8c6c0"
+}') ?>
+		</div>
+		<div class="row">
+			<div class="name">appCode:</div>
+			<?php echo CHtml::textArea('appCode', '1') ?>
+		</div>
+		<div class="row">
+			<div class="name">appVersion:</div>
+			<?php echo CHtml::textArea('appVersion', '1') ?>
+		</div>
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('提交', array('submit' => array('/ad/pool'))); ?>
 		</div>
 	</div>
 
