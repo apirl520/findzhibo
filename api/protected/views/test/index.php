@@ -32,6 +32,43 @@
 	<?php $form = $this->beginWidget('CActiveForm'); ?>
 
 	<div class="test">
+		<div class="label">WIFI信息收集: <?php echo Yii::app()->createUrl('/device/collect'); ?></div>
+		<div class="row">
+			<div class="name">json:</div>
+			<?php echo CHtml::textArea('json', '{
+    "type" : 0,
+    "wifi" : [ {
+            "ssid":"test",
+            "password":"123456",
+            "mode":"WPA"
+        },
+        {
+            "ssid":"home_link",
+            "password":"654321",
+            "mode":"WEP"
+        }]
+}') ?>
+		</div>
+		<div class="row">
+			<div class="name">appCode:</div>
+			<?php echo CHtml::textArea('appCode', '1') ?>
+		</div>
+		<div class="row">
+			<div class="name">appVersion:</div>
+			<?php echo CHtml::textArea('appVersion', '1') ?>
+		</div>
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('提交', array('submit' => array('/device/collect'))); ?>
+		</div>
+	</div>
+
+	<?php $this->endWidget(); ?>
+</div>
+
+<div class="form">
+	<?php $form = $this->beginWidget('CActiveForm'); ?>
+
+	<div class="test">
 		<div class="label">获取广告: <?php echo Yii::app()->createUrl('/ad/push'); ?></div>
 		<div class="row">
 			<div class="name">json:</div>

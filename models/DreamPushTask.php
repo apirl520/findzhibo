@@ -12,6 +12,36 @@ class DreamPushTask extends ODreamPushTask {
 		return parent::model($className);
 	}
 
+	public function rules() {
+		return array(
+			array('push_type, push_title, push_description, push_ad_id, push_status', 'required'),
+			array('push_type, push_ad_id, push_status, push_limit', 'numerical', 'integerOnly' => true),
+			array('push_title', 'length', 'max' => 120),
+			array('push_description', 'length', 'max' => 255),
+			array(
+				'id, push_type, push_title, push_description, push_ad_id, push_status, push_limit, ctime',
+				'safe',
+				'on' => 'search'
+			),
+		);
+	}
+
+	public function relations() {
+		return array(
+			'task' => array(self::BELONGS_TO, 'DreamAdPackage', 'push_ad_id')
+		);
+	}
+
+	public function attributeLabels() {
+		return array(
+			'push_type' => '类型',
+			'push_title' => 'push标题',
+			'push_description' => 'push内容',
+			'push_ad_id' => '关联广告',
+			'push_status' => 'push状态',
+		);
+	}
+
 	public function getPushTasks($push_ids, $push_type) {
 		$push_tasks = array();
 		$criteria = new CDbCriteria();
@@ -30,8 +60,8 @@ class DreamPushTask extends ODreamPushTask {
 				$push_tasks[$key]['content'] = $task->push_description;
 				$push_tasks[$key]['package_name'] = $push_ad_info->package_name;
 				$push_tasks[$key]['icon_url'] = Yii::app()->params['host'] . $push_ad_info->icon_url;
-				$push_tasks[$key]['cover_url'] = Yii::app()->params['host'] . $push_ad_info->image_url;
-				$download_url = strpos($push_ad_info->download_url, 'http://') === false ? Yii::app()->params['host'] . $push_ad_info->download_url : $push_ad_info->download_url;
+				$push_tasks[$key]['cover_url'] = $push_ad_info->image_url ? Yii::app()->params['host'] . $push_ad_info->image_url : "";
+				$download_url = strpos($push_ad_info->download_url, '://') ? $push_ad_info->download_url : Yii::app()->params['host'] . $push_ad_info->download_url;
 				$push_tasks[$key]['download_url'] = $download_url;
 			}
 		}

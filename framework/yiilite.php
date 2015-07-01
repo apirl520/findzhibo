@@ -650,8 +650,8 @@ class CComponent
 		}
 		elseif(is_array($this->_m))
 		{
- 			if(isset($this->_m[$name]))
- 				return true;
+			if(isset($this->_m[$name]))
+				return true;
 			foreach($this->_m as $object)
 			{
 				if($object->getEnabled() && (property_exists($object,$name) || $object->canGetProperty($name)))
@@ -2435,7 +2435,7 @@ class CHttpRequest extends CApplicationComponent
 		{
 			$pathInfo=$this->getRequestUri();
 			if(($pos=strpos($pathInfo,'?'))!==false)
-			   $pathInfo=substr($pathInfo,0,$pos);
+				$pathInfo=substr($pathInfo,0,$pos);
 			$pathInfo=$this->decodePathInfo($pathInfo);
 			$scriptUrl=$this->getScriptUrl();
 			$baseUrl=$this->getBaseUrl();
@@ -2509,7 +2509,7 @@ class CHttpRequest extends CApplicationComponent
 	public function getIsSecureConnection()
 	{
 		return isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS']=='on' || $_SERVER['HTTPS']==1)
-			|| isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']=='https';
+		|| isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']=='https';
 	}
 	public function getRequestType()
 	{
@@ -2874,10 +2874,10 @@ class CHttpRequest extends CApplicationComponent
 			{
 				case 'POST':
 					$userToken=$this->getPost($this->csrfTokenName);
-				break;
+					break;
 				case 'PUT':
 					$userToken=$this->getPut($this->csrfTokenName);
-				break;
+					break;
 				case 'DELETE':
 					$userToken=$this->getDelete($this->csrfTokenName);
 			}
@@ -4840,7 +4840,7 @@ class CHtml
 	public static function statefulForm($action='',$method='post',$htmlOptions=array())
 	{
 		return self::form($action,$method,$htmlOptions)."\n".
-			self::tag('div',array('style'=>'display:none'),self::pageStateField(''));
+		self::tag('div',array('style'=>'display:none'),self::pageStateField(''));
 	}
 	public static function pageStateField($value)
 	{
@@ -5402,7 +5402,7 @@ EOD;
 		// still use isset($_POST[$modelClass]) to detect if the input is submitted
 		$hiddenOptions=isset($htmlOptions['id']) ? array('id'=>self::ID_PREFIX.$htmlOptions['id']) : array('id'=>false);
 		return self::hiddenField($htmlOptions['name'],'',$hiddenOptions)
-			. self::activeInputField('file',$model,$attribute,$htmlOptions);
+		. self::activeInputField('file',$model,$attribute,$htmlOptions);
 	}
 	public static function activeRadioButton($model,$attribute,$htmlOptions=array())
 	{
@@ -8190,7 +8190,7 @@ class CActiveRelation extends CBaseActiveRelation
 	public $alias;
 	public $with=array();
 	public $together;
-	 public $scopes;
+	public $scopes;
 	public $through;
 	public function mergeWith($criteria,$fromScope=false)
 	{
@@ -8843,26 +8843,26 @@ abstract class CDbSchema extends CComponent
 	public function addColumn($table, $column, $type)
 	{
 		return 'ALTER TABLE ' . $this->quoteTableName($table)
-			. ' ADD ' . $this->quoteColumnName($column) . ' '
-			. $this->getColumnType($type);
+		. ' ADD ' . $this->quoteColumnName($column) . ' '
+		. $this->getColumnType($type);
 	}
 	public function dropColumn($table, $column)
 	{
 		return "ALTER TABLE ".$this->quoteTableName($table)
-			." DROP COLUMN ".$this->quoteColumnName($column);
+		." DROP COLUMN ".$this->quoteColumnName($column);
 	}
 	public function renameColumn($table, $name, $newName)
 	{
 		return "ALTER TABLE ".$this->quoteTableName($table)
-			. " RENAME COLUMN ".$this->quoteColumnName($name)
-			. " TO ".$this->quoteColumnName($newName);
+		. " RENAME COLUMN ".$this->quoteColumnName($name)
+		. " TO ".$this->quoteColumnName($newName);
 	}
 	public function alterColumn($table, $column, $type)
 	{
 		return 'ALTER TABLE ' . $this->quoteTableName($table) . ' CHANGE '
-			. $this->quoteColumnName($column) . ' '
-			. $this->quoteColumnName($column) . ' '
-			. $this->getColumnType($type);
+		. $this->quoteColumnName($column) . ' '
+		. $this->quoteColumnName($column) . ' '
+		. $this->getColumnType($type);
 	}
 	public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete=null, $update=null)
 	{
@@ -8886,7 +8886,7 @@ abstract class CDbSchema extends CComponent
 	public function dropForeignKey($name, $table)
 	{
 		return 'ALTER TABLE '.$this->quoteTableName($table)
-			.' DROP CONSTRAINT '.$this->quoteColumnName($name);
+		.' DROP CONSTRAINT '.$this->quoteColumnName($name);
 	}
 	public function createIndex($name, $table, $column, $unique=false)
 	{
@@ -8900,8 +8900,8 @@ abstract class CDbSchema extends CComponent
 				$cols[]=$this->quoteColumnName($col);
 		}
 		return ($unique ? 'CREATE UNIQUE INDEX ' : 'CREATE INDEX ')
-			. $this->quoteTableName($name).' ON '
-			. $this->quoteTableName($table).' ('.implode(', ',$cols).')';
+		. $this->quoteTableName($name).' ON '
+		. $this->quoteTableName($table).' ('.implode(', ',$cols).')';
 	}
 	public function dropIndex($name, $table)
 	{
@@ -8914,30 +8914,30 @@ abstract class CDbSchema extends CComponent
 		foreach($columns as $i=>$col)
 			$columns[$i]=$this->quoteColumnName($col);
 		return 'ALTER TABLE ' . $this->quoteTableName($table) . ' ADD CONSTRAINT '
-			. $this->quoteColumnName($name) . '  PRIMARY KEY ('
-			. implode(', ', $columns). ' )';
+		. $this->quoteColumnName($name) . '  PRIMARY KEY ('
+		. implode(', ', $columns). ' )';
 	}
 	public function dropPrimaryKey($name,$table)
 	{
 		return 'ALTER TABLE ' . $this->quoteTableName($table) . ' DROP CONSTRAINT '
-			. $this->quoteColumnName($name);
+		. $this->quoteColumnName($name);
 	}
 }
 class CSqliteSchema extends CDbSchema
 {
-    public $columnTypes=array(
-        'pk' => 'integer PRIMARY KEY AUTOINCREMENT NOT NULL',
-        'string' => 'varchar(255)',
-        'text' => 'text',
-        'integer' => 'integer',
-        'float' => 'float',
-        'decimal' => 'decimal',
-        'datetime' => 'datetime',
-        'timestamp' => 'timestamp',
-        'time' => 'time',
-        'date' => 'date',
-        'binary' => 'blob',
-        'boolean' => 'tinyint(1)',
+	public $columnTypes=array(
+		'pk' => 'integer PRIMARY KEY AUTOINCREMENT NOT NULL',
+		'string' => 'varchar(255)',
+		'text' => 'text',
+		'integer' => 'integer',
+		'float' => 'float',
+		'decimal' => 'decimal',
+		'datetime' => 'datetime',
+		'timestamp' => 'timestamp',
+		'time' => 'time',
+		'date' => 'date',
+		'binary' => 'blob',
+		'boolean' => 'tinyint(1)',
 		'money' => 'decimal(19,4)',
 	);
 	public function resetSequence($table,$value=null)
@@ -9292,9 +9292,9 @@ class CDbCommand extends CComponent
 		else
 			$par='';
 		if($this->_connection->queryCachingCount>0 && $method!==''
-				&& $this->_connection->queryCachingDuration>0
-				&& $this->_connection->queryCacheID!==false
-				&& ($cache=Yii::app()->getComponent($this->_connection->queryCacheID))!==null)
+			&& $this->_connection->queryCachingDuration>0
+			&& $this->_connection->queryCacheID!==false
+			&& ($cache=Yii::app()->getComponent($this->_connection->queryCacheID))!==null)
 		{
 			$this->_connection->queryCachingCount--;
 			$cacheKey='yii:dbquery'.$this->_connection->connectionString.':'.$this->_connection->username;
