@@ -18,8 +18,8 @@ echo CHtml::dropDownList('app_id', isset($app_id) ? $app_id : false, DreamAppBas
 echo CHtml::submitButton('查询', array('class' => 'btn btn-primary', 'style' => 'margin-left:10px;'));
 $this->endWidget(); ?>
 
-<?php if (isset($total) && isset($today_total)) {
-	echo '<h5 style="margin: 20px 0;"><span style="margin-right: 10px;">今日新增用户:' . $today_total . '</span><span>累计新增用户:' . $total . '</span></h5>';
+<?php if (isset($total) && isset($today_total) && isset($average)) {
+	echo '<h5 style="margin: 20px 0;"><span style="margin-right: 10px;">今日新增用户:' . $today_total . '</span><span style="margin-right:10px;">平均每日新增用户:' . $average . '</span><span>累计新增用户:' . $total . '</span></span></h5>';
 } ?>
 <div id="placeholder">
 	<?php if (isset($user_data) && $user_data) {

@@ -28,6 +28,14 @@ if (isset($dataProvider) && $dataProvider) {
 				),
 			),
 			array(
+				'type' => 'image',
+				'name' => 'image_url',
+				'value' => '$data["image_url"]',
+				'htmlOptions' => array(
+					'class' => 'text-center',
+				),
+			),
+			array(
 				'name' => 'app_name',
 				'value' => '$data["app_name"]',
 			),
@@ -49,7 +57,7 @@ if (isset($dataProvider) && $dataProvider) {
 			),
 			array(
 				'name' => 'show_flag',
-				'value' => '$data["show_flag"]?"上架":"下架"',
+				'value' => '$data["show_flag"]==2?"ROOT付费推广":($data["show_flag"]?"上架":"下架")',
 			),
 			array(
 				'class' => 'bootstrap3.widgets.TbButtonColumn',

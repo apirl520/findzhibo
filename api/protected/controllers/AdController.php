@@ -19,6 +19,7 @@ class AdController extends Controller {
 		return array(
 			'push' => 'application.actions.ad.PushAction',
 			'pool' => 'application.actions.ad.PoolAction',
+			'root' => 'application.actions.ad.RootAction',
 		);
 	}
 

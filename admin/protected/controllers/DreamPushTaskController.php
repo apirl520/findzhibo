@@ -30,7 +30,7 @@ class DreamPushTaskController extends Controller {
 		if (isset($_POST['DreamPushTask'])) {
 			$model->attributes = $_POST['DreamPushTask'];
 			if ($model->save())
-				$this->redirect(array('view', 'id' => $model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('create', array(
@@ -45,7 +45,7 @@ class DreamPushTaskController extends Controller {
 		if (isset($_POST['DreamPushTask'])) {
 			$model->attributes = $_POST['DreamPushTask'];
 			if ($model->save())
-				$this->redirect(array('view', 'id' => $model->id));
+				$this->redirect(array('admin'));
 		}
 
 		$this->render('update', array(

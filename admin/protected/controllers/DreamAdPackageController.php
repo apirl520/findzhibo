@@ -32,6 +32,8 @@ class DreamAdPackageController extends Controller {
 			$file = CUploadedFile::getInstance($model, 'download_url');
 			$image = CUploadedFile::getInstance($model, 'image_url');
 			$model->attributes = $_POST['DreamAdPackage'];
+			$model->level = 5;
+			$model->download_time = '5000W+';
 			if ($file) {
 				$this->saveFile($model, $file);
 			}
@@ -59,9 +61,12 @@ class DreamAdPackageController extends Controller {
 			$image = CUploadedFile::getInstance($model, 'image_url');
 			$old_icon_url = $model->icon_url;
 			$old_image_url = $model->image_url;
+			$old_download_url = $model->download_url;
 			$model->attributes = $_POST['DreamAdPackage'];
 			if ($file) {
 				$this->saveFile($model, $file);
+			}else{
+				$model->download_url = $old_download_url;
 			}
 			if ($icon) {
 				$model = $this->saveIcon($model, $icon);
@@ -222,7 +227,6 @@ class DreamAdPackageController extends Controller {
 				$old_download_paths = explode('/', $old_download);
 				$old_download_path = $old_download_paths[3];
 				if (file_exists($old_download_path)) {
-					var_dump($old_download_path);
 					unlink($file_uploadFile . $old_download_path);
 				}
 			}

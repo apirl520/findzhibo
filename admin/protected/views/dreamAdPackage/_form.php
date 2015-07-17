@@ -51,7 +51,11 @@
 				'placeholder' => '请输入排序系数',
 				'style' => 'width:100px'
 			)); ?>
-			<?php echo $form->checkBoxRow($model, 'show_flag'); ?>
+			<?php echo $form->dropDownListRow($model, 'show_flag', array(0 => '下架', 1 => '上架', 2 => 'ROOT付费推广'), array(
+				'empty' => '-请选择模式-',
+				'class' => 'form-control',
+				'style' => 'width:100px',
+			)); ?>
 		</fieldset>
 
 		<div class="form-actions">

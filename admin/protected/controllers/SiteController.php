@@ -8,6 +8,7 @@ class SiteController extends Controller {
 		if (Yii::app()->user->isGuest) {
 			$this->redirect('site/login');
 		} else {
+			$average = 0;
 			$today_total = 0;
 			$user_data = array();
 			$app_id = Yii::app()->request->getParam('app_id', false);
@@ -27,10 +28,18 @@ class SiteController extends Controller {
 					$today_total = $detail->device_id;
 				}
 			}
+			$criteria = new CDbCriteria();
+			$criteria->order = 'id asc';
+			$first_date = DreamDeviceUuid::model()->find($criteria);
+			$criteria->order = 'id desc';
+			$end_date = DreamDeviceUuid::model()->find($criteria);
+			$day_range = round((strtotime($end_date->ctime) - strtotime($first_date->ctime)) / 86400);
+			$average = round($total / $day_range);
 			$this->render('index', array(
 				'total' => $total,
 				'app_id' => $app_id,
 				'user_data' => $user_data,
+				'average' => $average,
 				'today_total' => $today_total,
 			));
 		}
