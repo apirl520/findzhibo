@@ -43,8 +43,10 @@ class DreamAdPackageController extends Controller {
 			if ($image) {
 				$model = $this->saveImage($model, $image);
 			}
-			if ($model->save())
+			if ($model->save()) {
+				$this->upload($model->id);
 				$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('create', array(
@@ -65,7 +67,7 @@ class DreamAdPackageController extends Controller {
 			$model->attributes = $_POST['DreamAdPackage'];
 			if ($file) {
 				$this->saveFile($model, $file);
-			}else{
+			} else {
 				$model->download_url = $old_download_url;
 			}
 			if ($icon) {
@@ -78,8 +80,10 @@ class DreamAdPackageController extends Controller {
 			} else {
 				$model->image_url = $old_image_url;
 			}
-			if ($model->save())
+			if ($model->save()) {
+				$this->upload($model->id);
 				$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('update', array(
@@ -237,5 +241,28 @@ class DreamAdPackageController extends Controller {
 			$model->package_name = $apkFile['package_name'];
 		}
 		return $model;
+	}
+
+	public function upload($id) {
+		$ad_info = DreamAdPackage::model()->find('id =:id', array(':id' => $id));
+		if ($ad_info) {
+			if (isset($ad_info->download_url) && $ad_info->download_url) {
+				if (!strpos($ad_info->download_url, '://')) {
+					$download_url = substr($ad_info->download_url, 1);
+					$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $download_url . '"';
+					exec($cmd);
+				}
+			}
+			if (isset($ad_info->image_url) && $ad_info->image_url) {
+				$image_url = substr($ad_info->image_url, 1);
+				$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $image_url . '"';
+				exec($cmd);
+			}
+			if (isset($ad_info->icon_url) && $ad_info->icon_url) {
+				$icon_url = substr($ad_info->icon_url, 1);
+				$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $icon_url . '"';
+				exec($cmd);
+			}
+		}
 	}
 }

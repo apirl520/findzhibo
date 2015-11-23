@@ -25,6 +25,9 @@ class PushAction extends BaseAction {
 			$push_ids = DreamPushAppRelative::model()->checkPushStatus($app_code, $push_type);
 			//获取当前有效的广告推送任务
 			$push_ads = DreamPushTask::model()->getPushTasks($push_ids, $push_type);
+			//get baidu cpd AD
+			$uuid = isset($json->uuid) ? $json->uuid : false;
+			$push_ads = Util::getBaiduAd($uuid, $push_ads, 'push');
 			if ($push_ads) {
 				$this->response->push = array_values($push_ads);
 			} else {

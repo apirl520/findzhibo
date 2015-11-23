@@ -32,6 +32,7 @@ class DreamApp extends ODreamApp {
 	}
 
 	public function checkOpenStatus($app_id, $app_version) {
+		return true;
 		$app_info = $this->find('app_id =:app_id and app_version =:app_version', array(':app_id' => $app_id, ':app_version' => $app_version));
 		if ($app_info) {
 			if ($app_info->ad_switch) {

@@ -83,7 +83,9 @@
 		</ul>
 		<div class="privacy pull-left">Website Template designed by <a href="http://www.templatemonster.com/"
 		                                                               target="_blank"
-		                                                               rel="nofollow">TemplateMonster.com</a></div>
+		                                                               rel="nofollow">TemplateMonster.com</a>
+			<span style="margin-left: 10px;">京ICP备15047024号</span>
+		</div>
 	</div>
 </footer>
 <!--footer end-->

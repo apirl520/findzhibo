@@ -74,6 +74,8 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params' => array(
 		'open_status' => false,
-		'host' => 'http://www.findzhibo.com'
+		'host' => 'http://api.findzhibo.com',
+		'cdn-host' => 'http://download.kssws.ks-cdn.com',
+		'new-cdn-host' => 'http://app-ad-disk.kssws.ks-cdn.com',
 	),
 );

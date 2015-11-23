@@ -13,6 +13,7 @@ Yii::setPathOfAlias('bootstrap3', Yii::getPathOfAlias('common') . '/bootstrap3')
 return array(
 	'models.*',
 	'common.*',
+	'common.snoopy.*',
 	'models.default.*',
 	'application.models.*',
 	'application.components.*',

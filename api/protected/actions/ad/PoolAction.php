@@ -15,6 +15,7 @@ class PoolAction extends BaseAction {
 		$app_code = isset($this->request->appCode) ? $this->request->appCode : false;
 		$app_version = isset($this->request->appVersion) ? $this->request->appVersion : false;
 		if ($json && $app_code && $app_version) {
+			$host = Util::getHost();
 			$ad_list = array();
 			$criteria = new CDbCriteria();
 			$criteria->condition = 'show_flag =:show_flag';
@@ -25,12 +26,15 @@ class PoolAction extends BaseAction {
 				$ad_list[$key]['name'] = $ad_package->app_name;
 				$ad_list[$key]['desc'] = $ad_package->description;
 				$ad_list[$key]['packageName'] = $ad_package->package_name;
-				$ad_list[$key]['imageUrl'] = Yii::app()->params['host'] . $ad_package->icon_url;
-				$apkUrl = strpos($ad_package->download_url, '://') ? $ad_package->download_url : Yii::app()->params['host'] . $ad_package->download_url;
+				$ad_list[$key]['imageUrl'] = $host . $ad_package->icon_url;
+				$apkUrl = strpos($ad_package->download_url, '://') ? $ad_package->download_url : $host . $ad_package->download_url;
 				$ad_list[$key]['apkUrl'] = $apkUrl;
 				$ad_list[$key]['size'] = Util::formatFileSize($ad_package->file_size);
 				$ad_list[$key]['buttonName'] = '下载';
 			}
+			//get baidu cpd AD
+			$uuid = isset($json->uuid) ? $json->uuid : false;
+			$ad_list = Util::getBaiduAd($uuid, $ad_list);
 			if ($ad_list) {
 				$this->response->json = array_values($ad_list);
 			} else {

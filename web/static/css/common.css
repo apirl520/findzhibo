@@ -14,13 +14,16 @@
 	padding: 0;
 	width: 100%;
 }
-.category_list li {
+.category_list .category_card {
 	float: left;
 	width: 25%;
 	height: 220px;
 	list-style: none;
 	text-align: center;
 	margin: 5px 0;
+}
+.category_list .category_card img {
+	max-height: 195px;
 }
 .artist_list li {
 	float: left;
