@@ -246,23 +246,8 @@ class DreamAdPackageController extends Controller {
 	public function upload($id) {
 		$ad_info = DreamAdPackage::model()->find('id =:id', array(':id' => $id));
 		if ($ad_info) {
-			if (isset($ad_info->download_url) && $ad_info->download_url) {
-				if (!strpos($ad_info->download_url, '://')) {
-					$download_url = substr($ad_info->download_url, 1);
-					$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $download_url . '"';
-					exec($cmd);
-				}
-			}
-			if (isset($ad_info->image_url) && $ad_info->image_url) {
-				$image_url = substr($ad_info->image_url, 1);
-				$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $image_url . '"';
-				exec($cmd);
-			}
-			if (isset($ad_info->icon_url) && $ad_info->icon_url) {
-				$icon_url = substr($ad_info->icon_url, 1);
-				$cmd = 'cd /home/lxe && /usr/bin/python upload.py "' . $icon_url . '"';
-				exec($cmd);
-			}
+			$cmd = 'cd /home/www/findzhibo/api/protected/ && ./yiic upload ad --id=' . $id;
+			exec($cmd);
 		}
 	}
 }

@@ -75,7 +75,6 @@ return array(
 	'params' => array(
 		'open_status' => false,
 		'host' => 'http://api.findzhibo.com',
-		'cdn-host' => 'http://download.kssws.ks-cdn.com',
-		'new-cdn-host' => 'http://app-ad-disk.kssws.ks-cdn.com',
+		'cdn_host' => 'http://app-tools.b0.upaiyun.com',
 	),
 );

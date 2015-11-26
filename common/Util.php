@@ -20,7 +20,7 @@ class Util {
 	}
 
 	public static function getHost() {
-		return Yii::app()->params['new-cdn-host'];
+		return Yii::app()->params['cdn_host'];
 	}
 
 	public static function NumFormat($number) {
@@ -63,8 +63,6 @@ class Util {
 		}
 		if (!$imei) {
 			$criteria = new CDbCriteria();
-			$criteria->condition = 'imei !=:imei';
-			$criteria->params = array(':imei' => '');
 			$criteria->order = 'rand()';
 			$device_info = DreamDevice::model()->find($criteria);
 			if ($device_info) {
@@ -102,13 +100,13 @@ class Util {
 							$ad_list[$num]['package_name'] = $value['package'];
 							$ad_list[$num]['icon_url'] = $value['icon'];
 							$ad_list[$num]['cover_url'] = $screen_shots[0];
-							$ad_list[$num]['download_url'] = str_replace('m.baidu.com', 'qa19.app.baidu.com:8080', $value['download_url']) . '&imei=' . $imei . '&api_key=cea6fbb9e862233e3dbe6fcc6cad3bcf';
+							$ad_list[$num]['download_url'] = $value['download_url'] . '&imei=' . $imei . '&api_key=cea6fbb9e862233e3dbe6fcc6cad3bcf';
 						} else {
 							$ad_list[$num]['name'] = $value['sname'];
 							$ad_list[$num]['desc'] = $value['brief'];
 							$ad_list[$num]['packageName'] = $value['package'];
 							$ad_list[$num]['imageUrl'] = $value['icon'];
-							$ad_list[$num]['apkUrl'] = str_replace('m.baidu.com', 'qa19.app.baidu.com:8080', $value['download_url']) . '&imei=' . $imei . '&api_key=cea6fbb9e862233e3dbe6fcc6cad3bcf';
+							$ad_list[$num]['apkUrl'] = $value['download_url'] . '&imei=' . $imei . '&api_key=cea6fbb9e862233e3dbe6fcc6cad3bcf';
 							$ad_list[$num]['size'] = Util::formatFileSize($value['size']);
 							$ad_list[$num]['buttonName'] = '下载';
 						}
@@ -117,6 +115,7 @@ class Util {
 				}
 			}
 		}
+		shuffle($ad_list);
 		return $ad_list;
 	}
 

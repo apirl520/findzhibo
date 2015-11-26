@@ -23,4 +23,16 @@ class DreamDeviceUuid extends ODreamDeviceUuid {
 		}
 		return false;
 	}
+
+	public function createUid($app_id, $device_id) {
+		$uuid = new DreamDeviceUuid();
+		$uuid->app_id = $app_id;
+		$uuid->uuid = UUID::v4();
+		$uuid->device_id = $device_id;
+		$uuid->setIsNewRecord(true);
+		if ($uuid->save(false)) {
+			return $uuid->id;
+		}
+		return false;
+	}
 }
