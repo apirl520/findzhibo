@@ -18,6 +18,7 @@ class NovelListAction extends BaseAction {
 			$sort = isset($json->sort) ? $json->sort : false;
 			$sort_type = isset($json->sort_type) ? $json->sort_type : false;
 			$category_id = isset($json->category_id) ? $json->category_id : false;
+			$this->response->category = DreamNovelCategory::model()->getCategoryList();
 			return $this->response->novel_list = DreamNovel::model()->getNovelDetail($category_id, $sort, $sort_type, $offset, $pageSize);
 		}
 		return $this->response->code = 500;

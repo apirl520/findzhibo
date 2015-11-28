@@ -26,7 +26,18 @@ class DreamNovelCategory extends ODreamNovelCategory {
 				$category_id[] = $category_info_item->id;
 			}
 		}
-		return DreamNovel::model()->getNovelDetail($category_id, 'recommend');
+		return DreamNovel::model()->getNovelDetail($category_id, 'recommend', 1);
+	}
+
+	public function getCategoryList() {
+		$categoryList = array();
+		$category_list = $this->findAll();
+		foreach ($category_list as $key => $category_list_item) {
+			$categoryList[$key]['id'] = $category_list_item->id;
+			$categoryList[$key]['name'] = $category_list_item->name;
+			$categoryList[$key]['count'] = $category_list_item->count;
+		}
+		return $categoryList;
 	}
 
 }

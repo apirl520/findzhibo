@@ -36,7 +36,7 @@ class UidAction extends BaseAction {
 				if ($device_info) {
 					$uuid_info = DreamDeviceUuid::model()->find('device_id =:device_id', array(':device_id' => $device_info->id));
 					if ($uuid_info) {
-						$uuid = $uuid_info->id;
+						$uid = $uuid_info->id;
 					} else {
 						$uid = DreamDeviceUuid::model()->createUid($app_code, $device_info->id);
 					}

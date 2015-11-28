@@ -80,6 +80,7 @@ class TaskListAction extends BaseAction {
 				return $this->response->coin = DreamNovelUserInfo::model()->getCoin($uid);
 			} else {
 				$this->response->coin = DreamNovelUserInfo::model()->getCoin($uid);
+				$this->response->category = DreamNovelCategory::model()->getCategoryList();
 				return $this->response->task_list = DreamNovelTask::model()->getTaskList();
 			}
 		}

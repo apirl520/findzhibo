@@ -17,7 +17,7 @@ class NovelController extends Controller {
 
 	public function actions() {
 		return array(
-			'uuid' => 'application.actions.novel.UuidAction',
+			'uid' => 'application.actions.novel.UidAction',
 			'task_list' => 'application.actions.novel.TaskListAction',
 			'novel_list' => 'application.actions.novel.NovelListAction',
 		);
