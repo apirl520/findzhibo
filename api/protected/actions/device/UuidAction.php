@@ -13,8 +13,7 @@ class UuidAction extends BaseAction {
 		$controller = parent::run();
 		$json = isset($this->request->json) ? $this->request->json : false;
 		$app_code = isset($this->request->appCode) ? $this->request->appCode : false;
-		$app_version = isset($this->request->appVersion) ? $this->request->appVersion : false;
-		if ($json && $app_code && $app_version) {
+		if ($json && $app_code) {
 			$uuid = false;
 			$sn = isset($json->sn) ? $json->sn : false;
 			$imei = isset($json->imei) ? $json->imei : false;

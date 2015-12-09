@@ -12,9 +12,7 @@ class RootAction extends BaseAction {
 		Yii::trace(get_class($this) . '.run()');
 		$controller = parent::run();
 		$json = isset($this->request->json) ? $this->request->json : false;
-		$app_code = isset($this->request->appCode) ? $this->request->appCode : false;
-		$app_version = isset($this->request->appVersion) ? $this->request->appVersion : false;
-		if ($json && $app_code && $app_version) {
+		if ($json) {
 			$host = Util::getHost();
 			$ad_list = array();
 			$criteria = new CDbCriteria();

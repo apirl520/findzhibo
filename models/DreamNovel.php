@@ -17,7 +17,7 @@ class DreamNovel extends ODreamNovel {
 		$criteria = new CDbCriteria();
 		if (is_array($category_id)) {
 			$criteria->addInCondition('category_id', $category_id);
-		} else {
+		} else if ($category_id) {
 			$criteria->condition = 'category_id =:category_id';
 			$criteria->params = array(':category_id' => $category_id);
 		}

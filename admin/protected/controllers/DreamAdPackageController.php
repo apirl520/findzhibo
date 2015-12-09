@@ -121,6 +121,9 @@ class DreamAdPackageController extends Controller {
 		$criteria->order = 'id desc';
 		if ($title) {
 			$criteria->compare('app_name', $title, true);
+		} else {
+			$criteria->condition = 'show_flag != :show_flag';
+			$criteria->params = array(':show_flag' => 0);
 		}
 		$dataProvider = new CActiveDataProvider('DreamAdPackage');
 		$dataProvider->setCriteria($criteria);

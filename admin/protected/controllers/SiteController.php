@@ -10,12 +10,16 @@ class SiteController extends Controller {
 		} else {
 			$average = 0;
 			$today_total = 0;
+			$date = date('Y-m-d H:i:s', strtotime('-1 week'));
 			$user_data = array();
 			$app_id = Yii::app()->request->getParam('app_id', false);
 			$criteria = new CDbCriteria();
 			if ($app_id) {
-				$criteria->condition = 'app_id =:app_id';
-				$criteria->params = array(':app_id' => $app_id);
+				$criteria->condition = 'app_id =:app_id and ctime >=:date';
+				$criteria->params = array(':app_id' => $app_id, ':date' => $date . ' 00:00:00');
+			} else {
+				$criteria->condition = 'ctime >=:date';
+				$criteria->params = array(':date' => $date . ' 00:00:00');
 			}
 			$total = DreamDeviceUuid::model()->count($criteria);
 			$criteria->select = 'count(*) as device_id,app_id,DATE(ctime) as ctime';
@@ -28,13 +32,7 @@ class SiteController extends Controller {
 					$today_total = $detail->device_id;
 				}
 			}
-			$criteria = new CDbCriteria();
-			$criteria->order = 'id asc';
-			$first_date = DreamDeviceUuid::model()->find($criteria);
-			$criteria->order = 'id desc';
-			$end_date = DreamDeviceUuid::model()->find($criteria);
-			$day_range = round((strtotime($end_date->ctime) - strtotime($first_date->ctime)) / 86400);
-			$average = round($total / $day_range);
+			$average = round($total / 7);
 			$this->render('index', array(
 				'total' => $total,
 				'app_id' => $app_id,

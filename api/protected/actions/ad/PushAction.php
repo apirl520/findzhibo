@@ -17,17 +17,18 @@ class PushAction extends BaseAction {
 		if ($json && $app_code && $app_version) {
 			//push type 1:push 2:screen
 			$push_type = isset($json->type) ? $json->type : 1;
-			$open_status = DreamApp::model()->checkOpenStatus($app_code, $app_version);
-			if (!$open_status) {
-				return $this->response->code = 502;
-			}
 			//检查当前应用是否有推送任务
 			$push_ids = DreamPushAppRelative::model()->checkPushStatus($app_code, $push_type);
 			//获取当前有效的广告推送任务
 			$push_ads = DreamPushTask::model()->getPushTasks($push_ids, $push_type);
 			//get baidu cpd AD
 			$uuid = isset($json->uuid) ? $json->uuid : false;
-			$push_ads = Util::getBaiduAd($uuid, $push_ads, 'push');
+			$imei = isset($json->imei) ? $json->imei : false;
+			if ($app_version >= 200) {
+				if ($uuid || $imei) {
+					$push_ads = Util::getBaiduAd($uuid, $imei, $push_ads);
+				}
+			}
 			if ($push_ads) {
 				$this->response->push = array_values($push_ads);
 			} else {

@@ -74,8 +74,6 @@ class TaskListAction extends BaseAction {
 							}
 						}
 					}
-					//download ad 回调
-
 				}
 				return $this->response->coin = DreamNovelUserInfo::model()->getCoin($uid);
 			} else {
