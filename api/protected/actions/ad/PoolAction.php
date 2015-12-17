@@ -31,11 +31,11 @@ class PoolAction extends BaseAction {
 				$ad_list[$key]['buttonName'] = '下载';
 			}
 			//get baidu cpd AD
-			$uuid = isset($json->uuid) ? $json->uuid : false;
-			$imei = isset($json->imei) ? $json->imei : false;
-			if ($uuid || $imei) {
+//			$uuid = isset($json->uuid) ? $json->uuid : false;
+//			$imei = isset($json->imei) ? $json->imei : false;
+//			if ($uuid || $imei) {
 //				$ad_list = Util::getBaiduAd($uuid, $imei, $ad_list);
-			}
+//			}
 			if ($ad_list) {
 				$this->response->json = array_values($ad_list);
 			} else {

@@ -107,4 +107,8 @@ class Util {
 		return $ad_list;
 	}
 
+	public static function getBaiMsspAd($uuid, $imei, $ad_list) {
+
+	}
+
 }

@@ -10,18 +10,22 @@ class TestController extends Controller {
 
 	public $layout = '/test/column';
 
-	public function accessRules(){
+	public function accessRules() {
 
 	}
 
 	public function filters() {
 		return array(
-			array('application.filters.RequestFilter - Index'),
-			array('application.filters.ResponseFilter - Index'),
+			array('application.filters.RequestFilter - Index,Info'),
+			array('application.filters.ResponseFilter - Index,Info'),
 		);
 	}
 
 	public function actionIndex() {
 		$this->render('index');
+	}
+
+	public function actionInfo() {
+		$this->render('info');
 	}
 }
