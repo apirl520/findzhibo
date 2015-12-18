@@ -91,7 +91,7 @@ class DreamNovel extends ODreamNovel {
 		return $status_description;
 	}
 
-	public function getNovelSearch($keyword, $offset = 0, $pageSize = 5, $category_array) {
+	public function getNovelSearch($keyword, $offset = 0, $pageSize = 5) {
 		$novelList = array();
 		$criteria = new CDbCriteria();
 		//关键字找category_id
@@ -117,7 +117,6 @@ class DreamNovel extends ODreamNovel {
 		$novel_info = $this->findAll($criteria);
 		$host = Util::getHost();
 		foreach ($novel_info as $key => $novel_info_item) {
-			$ls_category_id = $novel_info_item->category_id;
 			$novelList[$key]['id'] = $novel_info_item->id;
 			$novelList[$key]['name'] = $novel_info_item->name;
 			$novelList[$key]['author'] = $novel_info_item->author;
@@ -127,8 +126,7 @@ class DreamNovel extends ODreamNovel {
 			$novelList[$key]['price'] = $novel_info_item->price;
 			$novelList[$key]['hot'] = $novel_info_item->hot;
 			$novelList[$key]['update_time'] = $novel_info_item->update_time;
-			$novelList[$key]['category_id'] = $ls_category_id;
-			$novelList[$key]['category_name'] = $category_array[$ls_category_id];
+			$novelList[$key]['category_id'] = $novel_info_item->category_id;
 		}
 		return array('count' => $count, 'data' => $novelList);
 	}

@@ -16,8 +16,7 @@ class NovelSearchAction extends BaseAction {
 			$offset = isset($json->offset) ? $json->offset : 0;
 			$pageSize = isset($json->pageSize) ? $json->pageSize : 10;
 			$keyword = isset($json->keyword) ? $json->keyword : false;
-			$category_array = DreamNovelCategory::model()->getCategoryName();
-			$result = DreamNovel::model()->getNovelSearch($keyword, $offset, $pageSize, $category_array);
+			$result = DreamNovel::model()->getNovelSearch($keyword, $offset, $pageSize);
 			$this->response->counts = $result['count'];
 			return $this->response->novel_list = $result['data'];
 		}
