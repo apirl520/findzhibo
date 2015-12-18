@@ -20,6 +20,7 @@ class NovelController extends Controller {
 			'uid' => 'application.actions.novel.UidAction',
 			'task_list' => 'application.actions.novel.TaskListAction',
 			'novel_list' => 'application.actions.novel.NovelListAction',
+			'novel_search'=>'application.actions.novel.NovelSearchAction'
 		);
 	}
 
