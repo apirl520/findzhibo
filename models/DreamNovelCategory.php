@@ -40,4 +40,13 @@ class DreamNovelCategory extends ODreamNovelCategory {
 		return $categoryList;
 	}
 
+	public function getCategoryName() {
+		$category_array = array();
+		$category_list = $this->findAll();
+		foreach ($category_list as $key => $category_list_item) {
+			$category_array[$category_list_item->id] = $category_list_item->name;
+		}
+		return $category_array;
+	}
+
 }

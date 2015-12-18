@@ -179,3 +179,32 @@
 
 	<?php $this->endWidget(); ?>
 </div>
+<div class="form">
+	<?php $form = $this->beginWidget('CActiveForm'); ?>
+
+	<div class="test">
+		<div class="label">获取小说列表: <?php echo Yii::app()->createUrl('/novel/novel_search'); ?></div>
+		<div class="row">
+			<div class="name">json:</div>
+			<?php echo CHtml::textArea('json', '{
+    "uid" : 1,
+    "offset":0,
+    "pageSize":10,
+    "keyword":""
+}') ?>
+		</div>
+		<div class="row">
+			<div class="name">appCode:</div>
+			<?php echo CHtml::textArea('appCode', '1') ?>
+		</div>
+		<div class="row">
+			<div class="name">appVersion:</div>
+			<?php echo CHtml::textArea('appVersion', '1') ?>
+		</div>
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('提交', array('submit' => array('/novel/novel_search'))); ?>
+		</div>
+	</div>
+
+	<?php $this->endWidget(); ?>
+</div>
