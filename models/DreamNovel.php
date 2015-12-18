@@ -72,6 +72,7 @@ class DreamNovel extends ODreamNovel {
 			$novelList[$key]['hot'] = $novel_info_item->hot;
 			$novelList[$key]['update_time'] = $novel_info_item->update_time;
 			$novelList[$key]['category_id'] = $novel_info_item->category_id;
+			$novelList[$key]['download'] = $host . $novel_info_item->download;
 		}
 		return array('count' => $count, 'data' => $novelList);
 	}
@@ -127,6 +128,7 @@ class DreamNovel extends ODreamNovel {
 			$novelList[$key]['hot'] = $novel_info_item->hot;
 			$novelList[$key]['update_time'] = $novel_info_item->update_time;
 			$novelList[$key]['category_id'] = $novel_info_item->category_id;
+			$novelList[$key]['download'] = $host . $novel_info_item->download;
 		}
 		return array('count' => $count, 'data' => $novelList);
 	}
