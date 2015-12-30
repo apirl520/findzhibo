@@ -25,7 +25,4 @@ class TestController extends Controller {
 		$this->render('index');
 	}
 
-	public function actionInfo() {
-		$this->render('info');
-	}
 }

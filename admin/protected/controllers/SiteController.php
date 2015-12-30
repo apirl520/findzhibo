@@ -43,7 +43,6 @@ class SiteController extends Controller {
 		}
 	}
 
-
 	public function actionLogin() {
 		$this->layout = 'login';
 

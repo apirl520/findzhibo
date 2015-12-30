@@ -50,6 +50,7 @@ return array(
 		),
 		'db' => require(dirname(__FILE__) . '/../../../common/db.php'),
 		'dream' => require(dirname(__FILE__) . '/../../../common/dreamDb.php'),
+		'quyu' => require(dirname(__FILE__).'/../../../common/shoufuDb.php'),
 		'errorHandler' => array(
 			// use 'site/error' action to display errors
 			'errorAction' => 'site/error',
@@ -68,6 +69,17 @@ return array(
 				),
 				*/
 			),
+		),
+		'cache' => array(
+				'class' => 'CMCache',
+				'keyPrefix' => 'findzhibo',
+				'servers' => array(
+						array(
+								'host' => 'localhost',
+								'port' => 11211,
+								'weight' => 100,
+						),
+				),
 		),
 	),
 	// application-level parameters that can be accessed

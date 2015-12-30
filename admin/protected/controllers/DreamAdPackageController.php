@@ -225,7 +225,7 @@ class DreamAdPackageController extends Controller {
 		if (!is_dir($file_uploadFile)) {
 			mkdir($file_uploadFile, 0777, true);
 		}
-		$file_name = $file->getName();
+		$file_name = md5($file->getName()) . '.apk';
 		$old_download = $model->download_url;
 		$model->download_url = '/data/apk/' . $file_name;
 		$file_uploadFileLocation = $file_uploadFile . $file_name;
