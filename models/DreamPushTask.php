@@ -59,7 +59,7 @@ class DreamPushTask extends ODreamPushTask {
 				if ($push_ad_info) {
 					$push_tasks[$key]['app_name'] = $push_ad_info->app_name;
 					$push_tasks[$key]['type'] = 'self';
-					$push_tasks[$key]['pre_install'] = 1;
+					$push_tasks[$key]['pre_install'] = 0;
 					$push_tasks[$key]['title'] = $task->push_title;
 					$push_tasks[$key]['content'] = $task->push_description;
 					$push_tasks[$key]['package_name'] = $push_ad_info->package_name;

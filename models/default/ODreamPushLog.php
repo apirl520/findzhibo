@@ -5,7 +5,8 @@
  *
  * The followings are the available columns in table 'dream_push_log':
  * @property integer $id
- * @property string $uuid
+ * @property string $unique_key
+ * @property string $imei
  * @property string $request_json
  * @property string $ctime
  */
@@ -27,11 +28,11 @@ class ODreamPushLog extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('uuid, request_json, ctime', 'required'),
-			array('uuid', 'length', 'max'=>120),
+			array('unique_key, imei, request_json, ctime', 'required'),
+			array('unique_key, imei', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, uuid, request_json, ctime', 'safe', 'on'=>'search'),
+			array('id, unique_key, imei, request_json, ctime', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +54,8 @@ class ODreamPushLog extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'uuid' => 'Uuid',
+			'unique_key' => 'Unique Key',
+			'imei' => 'Imei',
 			'request_json' => 'Request Json',
 			'ctime' => 'Ctime',
 		);
@@ -78,7 +80,8 @@ class ODreamPushLog extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('uuid',$this->uuid,true);
+		$criteria->compare('unique_key',$this->unique_key,true);
+		$criteria->compare('imei',$this->imei,true);
 		$criteria->compare('request_json',$this->request_json,true);
 		$criteria->compare('ctime',$this->ctime,true);
 

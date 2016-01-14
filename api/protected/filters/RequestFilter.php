@@ -18,11 +18,6 @@ class RequestFilter extends CFilter {
 			if (get_magic_quotes_gpc()) {
 				$json = stripslashes($json);
 			}
-			if (strpos($json, '"{\"')) {
-				$json = stripslashes($json);
-				$json = str_replace('"{', '{', $json);
-				$json = str_replace('}"', '}', $json);
-			}
 			$request->json = json_decode($json);
 		}
 

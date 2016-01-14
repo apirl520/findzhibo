@@ -30,7 +30,7 @@ class PushAction extends BaseAction {
 			//获取百度系列广告
 			$push_ads = Util::getBaiduAd($uuid, $imei, $mssp_deviceinfo, $push_ads);
 
-			$this->response->time = 3600;
+			$this->response->time = 3600 * 4;
 			if ($push_ads) {
 				$this->response->push = array_values($push_ads);
 			} else {

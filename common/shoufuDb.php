@@ -9,7 +9,7 @@ return array(
 	'connectionString' => 'mysql:host=192.168.0.103;dbname=app_91shoufu',
 	'emulatePrepare' => true,
 	'username' => 'apirl',
-	'password' => 'pestalia',
+	'password' => '123456',
 	'charset' => 'utf8',
 	'tablePrefix' => '',
 	'class' => 'CDbConnection',
