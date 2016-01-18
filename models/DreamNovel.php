@@ -64,6 +64,7 @@ class DreamNovel extends ODreamNovel {
 		foreach ($novel_info as $key => $novel_info_item) {
 			$novelList[$key]['id'] = $novel_info_item->id;
 			$novelList[$key]['name'] = $novel_info_item->name;
+			$novelList[$key]['info'] = $novel_info_item->info;
 			$novelList[$key]['author'] = $novel_info_item->author;
 			$novelList[$key]['cover'] = $host . $novel_info_item->cover;
 			$novelList[$key]['file_size'] = Util::formatFileSize($novel_info_item->fileSize);
@@ -120,6 +121,7 @@ class DreamNovel extends ODreamNovel {
 		foreach ($novel_info as $key => $novel_info_item) {
 			$novelList[$key]['id'] = $novel_info_item->id;
 			$novelList[$key]['name'] = $novel_info_item->name;
+			$novelList[$key]['info'] = $novel_info_item->info;
 			$novelList[$key]['author'] = $novel_info_item->author;
 			$novelList[$key]['cover'] = $host . $novel_info_item->cover;
 			$novelList[$key]['file_size'] = Util::formatFileSize($novel_info_item->fileSize);
