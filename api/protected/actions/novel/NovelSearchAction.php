@@ -17,6 +17,20 @@ class NovelSearchAction extends BaseAction {
 			$pageSize = isset($json->pageSize) ? $json->pageSize : 10;
 			$keyword = isset($json->keyword) ? $json->keyword : false;
 			$result = DreamNovel::model()->getNovelSearch($keyword, $offset, $pageSize);
+			if ($result['count']) {
+				$is_query = DreamNovelQuery::model()->find('query=:query', array(':query' => $keyword));
+				if ($is_query) {
+					$ls_count = $is_query->counts;
+					$is_query->results = $result['count'];
+					$is_query->counts = $ls_count + 1;
+				} else {
+					$new_query = new DreamNovelQuery();
+					$new_query->query = $keyword;
+					$new_query->results = $result['count'];
+					$new_query->counts = 1;
+
+				}
+			}
 			$this->response->counts = $result['count'];
 			return $this->response->novel_list = $result['data'];
 		}
