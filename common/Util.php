@@ -52,7 +52,11 @@ class Util {
 	}
 
 	public static function getBaiduAd($uuid, $imei, $mssp_deviceinfo, $ad_list) {
-		$baidu_flag = $mssp_flag = false;
+		$hour = date('H');
+		if($hour > 1 && $hour < 8) {
+			return $ad_list;
+		}
+		$baidu_flag = false;
 		$imei = isset($mssp_deviceinfo->imei) ? $mssp_deviceinfo->imei : $imei;
 		if (!$imei) {
 			if ($uuid) {
@@ -85,7 +89,7 @@ class Util {
 			$param['type'] = 'app';
 			$param['id'] = 2;
 			$param['pn'] = 0;
-			$param['rn'] = 60;
+			$param['rn'] = 20;
 			$param['dpi'] = '720_1280';
 			$param['format'] = 'json';
 
@@ -115,6 +119,23 @@ class Util {
 					}
 				}
 			}
+		}
+		$date = date('Y-m-d', time());
+		$dream_push_count = DreamPushCount::model()->find('date =:date', array(':date' => $date));
+		if ($dream_push_count) {
+			$dream_push_count->number++;
+			if ($baidu_flag) {
+				$dream_push_count->baidu_count++;
+			}
+			$dream_push_count->save(false);
+		} else {
+			$dream_push_count = new DreamPushCount();
+			$dream_push_count->number = 1;
+			$dream_push_count->mssp_count = 1;
+			$dream_push_count->baidu_count = 1;
+			$dream_push_count->date = $date;
+			$dream_push_count->setIsNewRecord(true);
+			$dream_push_count->save(false);
 		}
 		return $ad_list;
 	}

@@ -50,7 +50,7 @@ class DreamAdPackage extends ODreamAdPackage {
 	}
 
 	public function getAdPackageInfo($ad_id) {
-		return $this->find('id =:id and show_flag =:show_flag', array(':id' => $ad_id, ':show_flag' => 1));
+		return $this->find('id =:id and show_flag !=:show_flag', array(':id' => $ad_id, ':show_flag' => 0));
 	}
 
 	public function getAdList() {
