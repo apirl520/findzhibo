@@ -68,6 +68,9 @@ class TaskListAction extends BaseAction {
 										$status = DreamNovelUserInfo::model()->updateCoin($uid, $novel_info->price, 'minus');
 										if ($status) {
 											$this->response->download = Util::getHost() . $novel_info->download;
+											$ls_novel_hot = $novel_info->hot;
+											$novel_info->hot = $ls_novel_hot + 1;
+											$novel_info->save(false);
 										}
 									}
 								}
