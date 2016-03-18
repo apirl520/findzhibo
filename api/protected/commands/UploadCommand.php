@@ -26,6 +26,19 @@ class UploadCommand extends CConsoleCommand {
 		}
 	}
 
+	public function actionNovel() {
+		$bash_path = dirname(__FILE__) . '/../../..';
+		$novels = DreamNovel::model()->findAll('fileSize!=:fileSize', array(':fileSize' => 0));
+		foreach ($novels as $novel) {
+			$cover_path = '/data/novel/'.$novel->cover;
+			$cover = $bash_path . $cover_path;
+			$this->upload($cover, $cover_path);
+			$download_path = '/data/novel/'.$novel->download;
+			$download = $bash_path.$download_path;
+			$this->upload($download, $download_path);
+		}
+	}
+
 	public function upload($file, $file_path) {
 		require_once(dirname(__FILE__) . '/../../../common/upyun.class.php');
 		$upyun = new UpYun('app-tools', 'apirl', 'pestalia');

@@ -12,6 +12,7 @@ class TaskListAction extends BaseAction {
 		Yii::trace(get_class($this) . '.run()');
 		$controller = parent::run();
 		$json = isset($this->request->json) ? $this->request->json : false;
+		$appCode = isset($this->request->appcode) ? $this->request->appcode : 1;
 		if ($json) {
 			$uid = isset($json->uid) ? $json->uid : false;
 			$task_id = isset($json->task_id) ? $json->task_id : false;
@@ -48,13 +49,16 @@ class TaskListAction extends BaseAction {
 					if ($novel_id) {
 						$novel_info = DreamNovel::model()->find('id =:id', array(':id' => $novel_id));
 						if ($novel_info) {
+							if ($appCode == 2) {
+								$this->response->download = Util::getHost() . '/data/novel/' . $novel_info->download;
+							}
 							$taskRecord = DreamNovelUserTask::model()->find('uid=:uid and task_id =:task_id and task_detail =:task_detail', array(
 								':uid' => $uid,
 								':task_id' => $task_id,
 								':task_detail' => $novel_id
 							));
 							if ($taskRecord) {
-								$this->response->download = Util::getHost() . $novel_info->download;
+								$this->response->download = Util::getHost() . '/data/novel/' . $novel_info->download;
 							} else {
 								$user_coin = DreamNovelUserInfo::model()->getCoin($uid);
 								if ($user_coin >= $novel_info->price) {
@@ -67,7 +71,8 @@ class TaskListAction extends BaseAction {
 									if ($taskRecord->save(false)) {
 										$status = DreamNovelUserInfo::model()->updateCoin($uid, $novel_info->price, 'minus');
 										if ($status) {
-											$this->response->download = Util::getHost() . $novel_info->download;
+											DreamNovelUserInfo::model()->updateCoin($uid, $task_id, 'plus');
+											$this->response->download = Util::getHost() . '/data/novel/' . $novel_info->download;
 											$ls_novel_hot = $novel_info->hot;
 											$novel_info->hot = $ls_novel_hot + 1;
 											$novel_info->save(false);

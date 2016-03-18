@@ -23,6 +23,7 @@ class DreamNovel extends ODreamNovel {
 				$criteria->params = array(':category_id' => $category_id);
 			}
 		$criteria->addCondition('status != 0');
+		$criteria->addCondition('fileSize !=0');
 		switch ($sort) {
 			case 'recommend':
 				$criteria->order = 'rand()';
@@ -66,14 +67,15 @@ class DreamNovel extends ODreamNovel {
 			$novelList[$key]['name'] = $novel_info_item->name;
 			$novelList[$key]['info'] = $novel_info_item->info;
 			$novelList[$key]['author'] = $novel_info_item->author;
-			$novelList[$key]['cover'] = $host . $novel_info_item->cover;
+			$novelList[$key]['cover'] = $host . '/data/novel/' . $novel_info_item->cover;
+			$novelList[$key]['size'] = $novel_info_item->fileSize;
 			$novelList[$key]['file_size'] = Util::formatFileSize($novel_info_item->fileSize);
 			$novelList[$key]['status'] = $this->getNovelStatus($novel_info_item->status);
 			$novelList[$key]['price'] = $novel_info_item->price;
 			$novelList[$key]['hot'] = $novel_info_item->hot;
 			$novelList[$key]['update_time'] = $novel_info_item->update_time;
 			$novelList[$key]['category_id'] = $novel_info_item->category_id;
-			$novelList[$key]['download'] = $host . $novel_info_item->download;
+//			$novelList[$key]['download'] = $host . '/data/novel/' . $novel_info_item->download;
 		}
 		return array('count' => $count, 'data' => $novelList);
 	}
@@ -113,6 +115,7 @@ class DreamNovel extends ODreamNovel {
 		$criteria->compare('name', $keyword, true, 'OR');
 		$criteria->order = 'update_time desc';
 		$criteria->addCondition('status != 0');
+		$criteria->addCondition('fileSize !=0');
 		$count = $this->count($criteria);
 		$criteria->offset = $offset * $pageSize;
 		$criteria->limit = $pageSize;
@@ -123,14 +126,15 @@ class DreamNovel extends ODreamNovel {
 			$novelList[$key]['name'] = $novel_info_item->name;
 			$novelList[$key]['info'] = $novel_info_item->info;
 			$novelList[$key]['author'] = $novel_info_item->author;
-			$novelList[$key]['cover'] = $host . $novel_info_item->cover;
+			$novelList[$key]['cover'] = $host . '/data/novel/' . $novel_info_item->cover;
+			$novelList[$key]['size'] = $novel_info_item->fileSize;
 			$novelList[$key]['file_size'] = Util::formatFileSize($novel_info_item->fileSize);
 			$novelList[$key]['status'] = $this->getNovelStatus($novel_info_item->status);
 			$novelList[$key]['price'] = $novel_info_item->price;
 			$novelList[$key]['hot'] = $novel_info_item->hot;
 			$novelList[$key]['update_time'] = $novel_info_item->update_time;
 			$novelList[$key]['category_id'] = $novel_info_item->category_id;
-			$novelList[$key]['download'] = $host . $novel_info_item->download;
+//			$novelList[$key]['download'] = $host . '/data/novel/' . $novel_info_item->download;
 		}
 		return array('count' => $count, 'data' => $novelList);
 	}

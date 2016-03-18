@@ -26,7 +26,7 @@
 		if (isset($category_list) && $category_list) {
 			foreach ($category_list as $category_each) {
 				echo CHtml::openTag('li', array('class' => 'category_card'));
-				echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/static/img/category/' . $category_each->image, $category_each->name, array('height' => '195px')), Yii::app()->createUrl('category/list', array('category_id' => $category_each->id)));
+				echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '../../data/gameShow/' . $category_each->image, $category_each->name, array('height' => '195px')), Yii::app()->createUrl('category/list', array('category_id' => $category_each->id)));
 				echo CHtml::openTag('div', array('class' => 'category_title'));
 				echo $category_each->name;
 				echo CHtml::closeTag('div');

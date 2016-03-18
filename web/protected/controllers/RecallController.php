@@ -1,30 +1,13 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: shilei
- * Date: 15/11/26
- * Time: 下午6:25
+ * Date: 16/3/2
+ * Time: 下午5:25
  */
-class NovelController extends Controller {
+class RecallController extends Controller {
 
-	public function filters() {
-		return array(
-			array('application.filters.RequestFilter - score'),
-			array('application.filters.ResponseFilter - score'),
-		);
-	}
-
-	public function actions() {
-		return array(
-			'uid' => 'application.actions.novel.UidAction',
-			'task_list' => 'application.actions.novel.TaskListAction',
-			'novel_list' => 'application.actions.novel.NovelListAction',
-			'novel_search'=>'application.actions.novel.NovelSearchAction'
-		);
-	}
-
-	public function actionScore() {
+	public function actionIndex() {
 		$key = 'IJe9J4TyksBFSq6x';
 		$user = Yii::app()->request->getParam('username', false);
 		$imei = Yii::app()->request->getParam('sn', false);
@@ -59,6 +42,6 @@ class NovelController extends Controller {
 				}
 			}
 		}
+		echo '200';
 	}
-
 }
