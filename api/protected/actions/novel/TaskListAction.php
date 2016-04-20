@@ -12,7 +12,7 @@ class TaskListAction extends BaseAction {
 		Yii::trace(get_class($this) . '.run()');
 		$controller = parent::run();
 		$json = isset($this->request->json) ? $this->request->json : false;
-		$appCode = isset($this->request->appcode) ? $this->request->appcode : 1;
+		$appVersion = isset($this->request->appVersion) ? $this->request->appVersion : 1;
 		if ($json) {
 			$uid = isset($json->uid) ? $json->uid : false;
 			$task_id = isset($json->task_id) ? $json->task_id : false;
@@ -49,7 +49,7 @@ class TaskListAction extends BaseAction {
 					if ($novel_id) {
 						$novel_info = DreamNovel::model()->find('id =:id', array(':id' => $novel_id));
 						if ($novel_info) {
-							if ($appCode == 2) {
+							if ($appVersion == 2) {
 								$this->response->download = Util::getHost() . '/data/novel/' . $novel_info->download;
 							}
 							$taskRecord = DreamNovelUserTask::model()->find('uid=:uid and task_id =:task_id and task_detail =:task_detail', array(

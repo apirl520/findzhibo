@@ -25,13 +25,16 @@ class AdController extends Controller {
 
 	public function actionOpen() {
 		//platform switch control
-		$code = 500;
-		$appCode = Yii::app()->request->getParam('appCode', false);
-		$appVersion = Yii::app()->request->getParam('appVersion', false);
-		$open_status = Yii::app()->params['open_status'];
-		if ($appCode && $appVersion) {
-			$code = 200;
-			$open_status = DreamApp::model()->checkOpenStatus($appCode, $appVersion);
+		$code = 200;
+		$open_status = false;
+		$ip = Yii::app()->request->getParam('ip', $_SERVER["REMOTE_ADDR"]);
+		if ($ip) {
+			$info = Util::filterIP($ip);
+			if ($info) {
+				if ($info['city'] != '北京' && $info['city'] != '上海' && $info['city'] != '广州' && $info['city'] != '深圳' && $info['province'] != '北京' && $info['province'] != '上海' && $info['province'] != '广东') {
+					$open_status = true;
+				}
+			}
 		}
 		echo json_encode(array('code' => $code, 'open_status' => $open_status));
 	}

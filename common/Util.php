@@ -53,7 +53,7 @@ class Util {
 
 	public static function getBaiduAd($uuid, $imei, $mssp_deviceinfo, $ad_list) {
 		$hour = date('H');
-		if($hour > 1 && $hour < 8) {
+		if ($hour > 1 && $hour < 8) {
 			return $ad_list;
 		}
 		$baidu_flag = false;
@@ -173,6 +173,16 @@ class Util {
 		$device_info = DreamDevice::model()->find('id =:id', array(':id' => $id));
 		$imei = $device_info->imei;
 		return $imei;
+	}
+
+	public static function filterIP($ip) {
+		$url = "http://apistore.baidu.com/microservice/iplookup?ip=" . $ip;
+		$snoopy = new Snoopy();
+		$snoopy->fetch($url);
+		$out_put = json_decode($snoopy->results);
+		$city = isset($out_put->retData->city) ? $out_put->retData->city : "";
+		$province = isset($out_put->retData->province) ? $out_put->retData->province : "";
+		return array('city' => $city, 'province' => $province);
 	}
 
 }
